@@ -7,7 +7,8 @@ class paddle:
         self.x=x 
         self.y=y 
         self.w=w 
-        self.h=h 
+        self.h=h
+        self.paddleRect=pygame.Rect(self.x, self.y, self.w, self.h)
     def setX(self,x):
         self.x=x 
     def setY(self,y):
@@ -30,6 +31,7 @@ class paddle:
     def drawPaddle(self,screen):
         pygame.draw.rect(screen, helpers.BLACK,
                          pygame.Rect(self.x, self.y, self.w, self.h))
+        self.paddleRect=pygame.Rect(self.x, self.y, self.w, self.h)
     def movePlayer(self,vel):
         keys=pygame.key.get_pressed()
         if keys[pygame.K_DOWN] and self.y<600:
