@@ -7,7 +7,8 @@ screen_width = 800
 screen_height = 600
 P1Score = 0
 P2Score = 0
-
+p1Hits=0
+p2Hits=0
 
 def getWidth():
     return screen_width
@@ -30,8 +31,10 @@ def setHeight(height):
 def checkCollision(player1, player2, gameBall, screen):
     if pygame.Rect.colliderect(player1.paddleRect, gameBall.ballRect):
         gameBall.xVel = 2
+        setHits("p1")
     if pygame.Rect.colliderect(player2.paddleRect, gameBall.ballRect):
         gameBall.xVel = -2
+        setHits("p2")
 
 
 def setScore(player):
@@ -40,8 +43,16 @@ def setScore(player):
         P1Score += 1
     if player == "p2":
         P2Score += 1
-
-
+def setHits(player):
+    global p1Hits, p2Hits
+    if player == "p1":
+        p1Hits += 1
+    if player == "p2":
+        p2Hits += 1
+def resetHits():
+    global p1Hits, p2Hits
+    p1Hits=0
+    p2Hits=0
 def resetScore():
     global P1Score, P2Score
     P1Score = 0

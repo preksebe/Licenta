@@ -1,7 +1,171 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9a328e2b-807a-4fb8-af8f-8012f153d7e0" name="Changes" comment="Added basic file structure" />
+    <list default="true" id="9a328e2b-807a-4fb8-af8f-8012f153d7e0" name="Changes" comment="Added basic file structure">
+      <change afterPath="$PROJECT_DIR$/.coveragerc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/activations.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/aggregations.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/attributes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/checkpoint.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/ctrnn/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/distributed.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/genes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/genome.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/graphs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/iznn/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/math_util.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/nn/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/nn/feed_forward.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/nn/recurrent.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/parallel.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/population.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/reporting.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/reproduction.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/six_util.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/species.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/stagnation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/statistics.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/lib/neat/threaded.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dist/neat_python-0.92-py3.8.egg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/activation-abs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/activation-clamped.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/activation-cube.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/activation-exp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/activation-gauss.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/activation-hat.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/activation-identity.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/activation-inv.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/activation-log.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/activation-relu.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/activation-sigmoid.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/activation-sin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/activation-softplus.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/activation-square.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/activation-tanh.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/activation.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/conf.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/config_file.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/ctrnn.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/customization.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/docutils.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/genome-interface.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/glossary.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/index.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/installation.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/make.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/module_summaries.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/neat_overview.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/plot_activations.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reproduction-interface.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/xor_example.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/circuits/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/circuits/clean.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/circuits/config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/circuits/evolve.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/circuits/visualize.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/memory-fixed/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/memory-fixed/clean.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/memory-fixed/config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/memory-fixed/evolve.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/memory-fixed/visualize.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/memory-variable/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/memory-variable/clean.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/memory-variable/config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/memory-variable/evolve.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/memory-variable/visualize.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/neuron-demo/demo-ctrnn.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/neuron-demo/demo-iznn.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/openai-lander/clean.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/openai-lander/config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/openai-lander/evolve.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/openai-lander/upload.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/openai-lander/visualize.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/picture2d/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/picture2d/clean.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/picture2d/common.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/picture2d/evolve_interactive.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/picture2d/evolve_novelty.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/picture2d/interactive_config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/picture2d/novelty_config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/picture2d/render.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/single-pole-balancing/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/single-pole-balancing/cart_pole.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/single-pole-balancing/clean.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/single-pole-balancing/config-ctrnn" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/single-pole-balancing/config-feedforward" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/single-pole-balancing/evolve-ctrnn.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/single-pole-balancing/evolve-feedforward.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/single-pole-balancing/fitness.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/single-pole-balancing/movie.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/single-pole-balancing/test-ctrnn.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/single-pole-balancing/test-feedforward.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/single-pole-balancing/visualize.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/xor/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/xor/clean.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/xor/config-feedforward" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/xor/config-feedforward-partial" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/xor/config-spiking" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/xor/evolve-feedforward-distributed.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/xor/evolve-feedforward-parallel.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/xor/evolve-feedforward-partial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/xor/evolve-feedforward-threaded.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/xor/evolve-feedforward.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/xor/evolve-minimal.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/xor/evolve-spiking.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/xor/visualize.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/neat_python.egg-info/PKG-INFO" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/neat_python.egg-info/SOURCES.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/neat_python.egg-info/dependency_links.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/neat_python.egg-info/top_level.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/bad_configuration1" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/bad_configuration2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/bad_configuration3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/bad_configuration4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/bad_configuration5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/bad_configuration6" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/bad_configuration7" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/bad_configuration8" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/bad_configuration9" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/bad_configurationA" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_activation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_aggregation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_config_save_restore.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_configuration" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_configuration2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_configuration3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_configuration4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_configuration5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_configuration_iznn" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_ctrnn.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_distributed.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_feedforward_network.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_genes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_genome.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_graphs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_iznn.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_nn.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_population.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_recurrent_network.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_reproduction.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_simple_run.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_xor_example.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_xor_example_distributed.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,7 +201,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/gamea"
+    "last_opened_file_path": "C:/Users/gamea/Desktop/NEAT-Pong-Python-main"
   }
 }]]></component>
   <component name="RunManager">
@@ -104,9 +268,9 @@
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>27</line>
-          <option name="timeStamp" value="13" />
+          <url>file://$PROJECT_DIR$/neat/nn/feed_forward.py</url>
+          <line>12</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
