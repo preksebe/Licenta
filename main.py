@@ -17,10 +17,7 @@ class PongGame:
         self.player1 = paddle.paddle(20, 20, 30, 100)
         self.player2 = paddle.paddle(750, 20, 30, 100)
         self.ball = Ball.ball(100, 100, 10)
-    def test_ai(self, net):
-        """
-        Test the AI against a human player by passing a NEAT neural network
-        """
+    def playAi(self, net):
         clock = pygame.time.Clock()
         run = True
         self.draw_game()
@@ -37,7 +34,7 @@ class PongGame:
             output = net.activate((self.player2.y, abs(
                 self.player2.x - self.ball.x), self.ball.y))
             self.ball.moveBall(self.screen)
-            helper.checkCollision(self.player1, self.player2, self.ball, self.screen)
+            helper.checkCollision(self.player1, self.player2, self.ball)
             decision = output.index(max(output))
             if decision == 1:  # AI moves up
                 self.player2.moveUp(8, self.screen)
@@ -72,9 +69,9 @@ class PongGame:
         pygame.display.set_caption("Pong game")
         # endregion
         # region draw paddles and ball (old code)
-        self.player1 = paddle.paddle(20, 20, 30, 100)
+        self.player1 = paddle.paddle(20, centerY, 5, 100)
         self.player1.drawPaddle(screen)
-        self.player2 = paddle.paddle(750, 20, 30, 100)
+        self.player2 = paddle.paddle(750, centerY, 5, 100)
         self.player2.drawPaddle(screen)
         self.ball = Ball.ball(centerX, centerY, 10)
         self.ball.drawBall(screen)
@@ -104,32 +101,22 @@ class PongGame:
             PongGame.draw_text(self.screen,helper.P2Score, PongGame.text_font, 150, 20)
             PongGame.draw_text(self.screen,helper.P1Score, PongGame.text_font, helper.getWidth() - 150, 20)
             self.moveAiPaddles(net1,net2)
-
-            keys = pygame.key.get_pressed()
-            # if keys[pygame.K_w]:
-            #     player1.moveUp(5, screen)
-            # if keys[pygame.K_s]:
-            #     player1.moveDown(5, screen)
-            # if keys[pygame.K_UP]:
-            #     player2.moveUp(5, screen)
-            # if keys[pygame.K_DOWN]:
-            #     player2.moveDown(5, screen)
-            # # player1.movePlayer(5)
             self.ball.moveBall(self.screen)
-            helper.checkCollision(self.player1, self.player2, self.ball, self.screen)
+            helper.checkCollision(self.player1, self.player2, self.ball)
             pygame.display.update()
 
 
             gameLength=time.time()-startTime
-            if helper.P1Score == 1 or helper.P2Score == 1 or helper.p1Hits>=maxHits or helper.p2Hits>=maxHits:
+            if helper.P1Score == 5 or helper.P2Score == 5 or helper.p1Hits>=maxHits or helper.p2Hits>=maxHits:
                 helper.resetScore()
                 self.calculate_fitness(gameLength)
+                helper.resetHits()
                 break
     # endregion
     def calculate_fitness(self,length):
-        self.genome1.fitness+=helper.p1Hits
-        self.genome2.fitness+=helper.p2Hits
-        helper.resetHits()
+        self.genome1.fitness+=helper.p1Hits+helper.P1Score
+        self.genome2.fitness+=helper.p2Hits+helper.P2Score
+
     def moveAiPaddles(self, net1, net2):
             """
             Determine where to move the left and the right paddle based on the two
@@ -146,33 +133,30 @@ class PongGame:
                 decision2=output2.index(max(output2))
                 valid1 = True
                 if(genome==self.genome1):
-                    if decision1 == 0:  # Don't move
-                        genome.fitness -= 0.01  # we want to discourage this
-                    elif decision1 == 1:  # Move up
+                    if decision1 == 0:
+                        genome.fitness -= 0.01
+                    elif decision1 == 1:
                         valid1 = self.player1.moveUp(6,self.screen)
-                    else:  # Move down
+                    else:
                         valid1 = self.player1.moveDown(6,self.screen)
 
-                    if not valid1:  # If the movement makes the paddle go off the screen punish the AI
+                    if not valid1:
                         genome.fitness -= 1
 
                 valid2 = True
                 if(genome==self.genome2):
-                    if decision2 == 0:  # Don't move
-                        genome.fitness -= 0.01  # we want to discourage this
-                    elif decision2 == 1:  # Move up
+                    if decision2 == 0:
+                        genome.fitness -= 0.01
+                    elif decision2 == 1:
                         valid2 = self.player2.moveUp(6,self.screen)
-                    else:  # Move down
+                    else:
                         valid2 = self.player2.moveDown(6,self.screen)
 
-                    if not valid2:  # If the movement makes the paddle go off the screen punish the AI
+                    if not valid2:
                         genome.fitness -= 1
 
 
 def eval_genomes(genomes, config):
-    """
-    Run each genome against eachother one time to determine the fitness.
-    """
     width, height = 700, 500
     win = pygame.display.set_mode((width, height))
     pygame.display.set_caption("Pong")
@@ -190,14 +174,13 @@ def eval_genomes(genomes, config):
 
 
 def run_neat(config):
-    #p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-49')
+    #p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-68')
     p = neat.Population(config)
     p.add_reporter(neat.StdOutReporter(True))
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
     p.add_reporter(neat.Checkpointer(1))
-
-    winner = p.run(eval_genomes, 8)
+    winner = p.run(eval_genomes, 100)
     with open("best.pickle", "wb") as f:
         pickle.dump(winner, f)
 
@@ -210,7 +193,7 @@ def test_best_network(config):
     win = pygame.display.set_mode((width, height))
     pygame.display.set_caption("Pong")
     pong = PongGame(win, width, height)
-    pong.test_ai(winner_net)
+    pong.playAi(winner_net)
 
 if __name__ == '__main__':
     local_dir = os.path.dirname(__file__)
@@ -219,6 +202,6 @@ if __name__ == '__main__':
     config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
                          neat.DefaultSpeciesSet, neat.DefaultStagnation,
                          config_path)
-    ##test_best_network(config)
+    #test_best_network(config)
     run_neat(config)
 

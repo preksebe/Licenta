@@ -9,6 +9,14 @@ class paddle:
         self.w=w 
         self.h=h
         self.paddleRect=pygame.Rect(self.x, self.y, self.w, self.h)
+    def getTopLeft(self):
+        return self.x-self.w/2,self.y+self.h/2
+    def getBottomLeft(self):
+        return self.x-self.w/2,self.y-self.h/2
+    def getTopRight(self):
+        return self.x+self.w/2,self.y+self.h/2
+    def getBottomRight(self):
+        return self.x+self.w/2,self.y-self.h/2
     def setX(self,x):
         self.x=x 
     def setY(self,y):

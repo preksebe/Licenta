@@ -28,13 +28,16 @@ def setHeight(height):
     screen_height = height
 
 
-def checkCollision(player1, player2, gameBall, screen):
-    if pygame.Rect.colliderect(player1.paddleRect, gameBall.ballRect):
-        gameBall.xVel = 2
+def checkCollision(player1, player2, ball):
+    if pygame.Rect.colliderect(player1.paddleRect, ball.ballRect):
+        ball.xVel = 2
         setHits("p1")
-    if pygame.Rect.colliderect(player2.paddleRect, gameBall.ballRect):
-        gameBall.xVel = -2
+        # ball.x ball.y
+
+    if pygame.Rect.colliderect(player2.paddleRect, ball.ballRect):
+        ball.xVel = -2
         setHits("p2")
+
 
 
 def setScore(player):
