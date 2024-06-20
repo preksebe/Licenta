@@ -79,6 +79,7 @@ class PongGame:
 
     # region game loop
     def trainAi(self, genome1, genome2, config):
+        clock = pygame.time.Clock()
         maxHits=20
         startTime=time.time()
         net1 = neat.nn.FeedForwardNetwork.create(genome1, config)
@@ -93,6 +94,7 @@ class PongGame:
                 self.player1.drawPaddle(self.screen)
                 self.player2.drawPaddle(self.screen)
                 pygame.event.get()
+                clock.tick(45)
                 self.ball.drawBall(self.screen)
                 PongGame.draw_text(self.screen,helper.P2Score, PongGame.text_font, 150, 20)
                 PongGame.draw_text(self.screen,helper.P1Score, PongGame.text_font, helper.getWidth() - 150, 20)
@@ -188,6 +190,6 @@ if __name__ == '__main__':
     config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
                          neat.DefaultSpeciesSet, neat.DefaultStagnation,
                          config_path)
-    test_best_network(config)
-    #run_neat(config)
+    #test_best_network(config)
+    run_neat(config)
 
