@@ -89,12 +89,12 @@ class PongGame:
         isGameRunning = True
         self.draw_game()
         while isGameRunning:
-            if True:
+            if False:
                 self.screen.fill(helper.BLUE)
                 self.player1.drawPaddle(self.screen)
                 self.player2.drawPaddle(self.screen)
                 pygame.event.get()
-                clock.tick(45)
+                #clock.tick(45)
                 self.ball.drawBall(self.screen)
                 PongGame.draw_text(self.screen,helper.P2Score, PongGame.text_font, 150, 20)
                 PongGame.draw_text(self.screen,helper.P1Score, PongGame.text_font, helper.getWidth() - 150, 20)
@@ -162,13 +162,13 @@ def eval_genomes(genomes, config):
 
 
 def run_neat(config):
-    #p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-68')
-    p = neat.Population(config)
+    p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-20')
+    #p = neat.Population(config)
     p.add_reporter(neat.StdOutReporter(True))
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
     p.add_reporter(neat.Checkpointer(1))
-    winner = p.run(eval_genomes, 10)
+    winner = p.run(eval_genomes, 1)
     with open("best.pickle", "wb") as f:
         pickle.dump(winner, f)
 
@@ -190,6 +190,6 @@ if __name__ == '__main__':
     config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
                          neat.DefaultSpeciesSet, neat.DefaultStagnation,
                          config_path)
-    #test_best_network(config)
-    run_neat(config)
+    test_best_network(config)
+    #run_neat(config)
 
