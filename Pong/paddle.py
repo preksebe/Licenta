@@ -33,9 +33,11 @@ class paddle:
     def moveDown(self,vel,screen):
         if(self.y<screen.get_height()-self.h):
             self.y+=vel
+            return True
     def moveUp(self,vel,screen):
         if(self.y>0):
             self.y-=vel
+            return True
     def drawPaddle(self,screen):
         pygame.draw.rect(screen, helpers.BLACK,
                          pygame.Rect(self.x, self.y, self.w, self.h))

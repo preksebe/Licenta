@@ -86,42 +86,31 @@ class PongGame:
         self.genome1=genome1
         self.genome2=genome2
         isGameRunning = True
-        clock = pygame.time.Clock()
         self.draw_game()
         while isGameRunning:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    return True
-            # sa scot astea separat
-            self.screen.fill(helper.BLUE)
-            self.player1.drawPaddle(self.screen)
-            self.player2.drawPaddle(self.screen)
-            pygame.event.get()
-            self.ball.drawBall(self.screen)
-            PongGame.draw_text(self.screen,helper.P2Score, PongGame.text_font, 150, 20)
-            PongGame.draw_text(self.screen,helper.P1Score, PongGame.text_font, helper.getWidth() - 150, 20)
+            # self.screen.fill(helper.BLUE)
+            # self.player1.drawPaddle(self.screen)
+            # self.player2.drawPaddle(self.screen)
+            # pygame.event.get()
+            # self.ball.drawBall(self.screen)
+            # PongGame.draw_text(self.screen,helper.P2Score, PongGame.text_font, 150, 20)
+            # PongGame.draw_text(self.screen,helper.P1Score, PongGame.text_font, helper.getWidth() - 150, 20)
             self.moveAiPaddles(net1,net2)
             self.ball.moveBall(self.screen)
             helper.checkCollision(self.player1, self.player2, self.ball)
-            pygame.display.update()
-
-
-            gameLength=time.time()-startTime
+            # pygame.display.update()
+            duration=time.time()-startTime
             if helper.P1Score == 5 or helper.P2Score == 5 or helper.p1Hits>=maxHits or helper.p2Hits>=maxHits:
                 helper.resetScore()
-                self.calculate_fitness(gameLength)
+                self.calculate_fitness(duration)
                 helper.resetHits()
                 break
     # endregion
-    def calculate_fitness(self,length):
-        self.genome1.fitness+=helper.p1Hits+helper.P1Score
-        self.genome2.fitness+=helper.p2Hits+helper.P2Score
+    def calculate_fitness(self,duration):
+        self.genome1.fitness+=helper.p1Hits+duration
+        self.genome2.fitness+=helper.p2Hits+duration
 
     def moveAiPaddles(self, net1, net2):
-            """
-            Determine where to move the left and the right paddle based on the two
-            neural networks that control them.
-            """
             counter=1
             players = [(self.genome1, net1, self.player1, True), (self.genome2, net2, self.player2, False)]
             for(genome,net,paddle,left) in players:
@@ -137,21 +126,18 @@ class PongGame:
                         genome.fitness -= 0.01
                     elif decision1 == 1:
                         valid1 = self.player1.moveUp(6,self.screen)
-                    else:
+                    elif decision1 == 2:
                         valid1 = self.player1.moveDown(6,self.screen)
-
                     if not valid1:
                         genome.fitness -= 1
-
                 valid2 = True
                 if(genome==self.genome2):
                     if decision2 == 0:
                         genome.fitness -= 0.01
                     elif decision2 == 1:
                         valid2 = self.player2.moveUp(6,self.screen)
-                    else:
+                    elif  decision2 == 2:
                         valid2 = self.player2.moveDown(6,self.screen)
-
                     if not valid2:
                         genome.fitness -= 1
 
@@ -166,11 +152,10 @@ def eval_genomes(genomes, config):
         genome1.fitness = 0
         for genome_id2, genome2 in genomes[min(i + 1, len(genomes) - 1):]:
             genome2.fitness = 0 if genome2.fitness == None else genome2.fitness
-            pong = PongGame(win, width, height)
 
-            force_quit = pong.trainAi(genome1, genome2, config)
-            if force_quit:
-                quit()
+            PongGame(win, width, height).trainAi(genome1, genome2, config)
+            PongGame(win, width, height).trainAi(genome2, genome1, config)
+
 
 
 def run_neat(config):
@@ -180,7 +165,7 @@ def run_neat(config):
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
     p.add_reporter(neat.Checkpointer(1))
-    winner = p.run(eval_genomes, 100)
+    winner = p.run(eval_genomes, 10)
     with open("best.pickle", "wb") as f:
         pickle.dump(winner, f)
 
@@ -202,6 +187,6 @@ if __name__ == '__main__':
     config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
                          neat.DefaultSpeciesSet, neat.DefaultStagnation,
                          config_path)
-    #test_best_network(config)
-    run_neat(config)
+    test_best_network(config)
+    #run_neat(config)
 

@@ -30,12 +30,12 @@ def setHeight(height):
 
 def checkCollision(player1, player2, ball):
     if pygame.Rect.colliderect(player1.paddleRect, ball.ballRect):
-        ball.xVel = 2
+        ball.xVel *= -1
         setHits("p1")
         # ball.x ball.y
 
     if pygame.Rect.colliderect(player2.paddleRect, ball.ballRect):
-        ball.xVel = -2
+        ball.xVel *= -1
         setHits("p2")
 
 
