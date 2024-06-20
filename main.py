@@ -88,17 +88,18 @@ class PongGame:
         isGameRunning = True
         self.draw_game()
         while isGameRunning:
-            # self.screen.fill(helper.BLUE)
-            # self.player1.drawPaddle(self.screen)
-            # self.player2.drawPaddle(self.screen)
-            # pygame.event.get()
-            # self.ball.drawBall(self.screen)
-            # PongGame.draw_text(self.screen,helper.P2Score, PongGame.text_font, 150, 20)
-            # PongGame.draw_text(self.screen,helper.P1Score, PongGame.text_font, helper.getWidth() - 150, 20)
+            if True:
+                self.screen.fill(helper.BLUE)
+                self.player1.drawPaddle(self.screen)
+                self.player2.drawPaddle(self.screen)
+                pygame.event.get()
+                self.ball.drawBall(self.screen)
+                PongGame.draw_text(self.screen,helper.P2Score, PongGame.text_font, 150, 20)
+                PongGame.draw_text(self.screen,helper.P1Score, PongGame.text_font, helper.getWidth() - 150, 20)
+                pygame.display.update()
             self.moveAiPaddles(net1,net2)
             self.ball.moveBall(self.screen)
             helper.checkCollision(self.player1, self.player2, self.ball)
-            # pygame.display.update()
             duration=time.time()-startTime
             if helper.P1Score == 5 or helper.P2Score == 5 or helper.p1Hits>=maxHits or helper.p2Hits>=maxHits:
                 helper.resetScore()
