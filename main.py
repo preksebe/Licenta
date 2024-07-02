@@ -37,15 +37,15 @@ class PongGame:
             helper.checkCollision(self.player1, self.player2, self.ball)
             decision = output.index(max(output))
             if decision == 1:  # AI moves up
-                self.player2.moveUp(8, self.screen)
+                self.player2.moveUp(6, self.screen)
             elif decision == 2:  # AI moves down
-                self.player2.moveDown(8, self.screen)
+                self.player2.moveDown(6, self.screen)
 
             keys = pygame.key.get_pressed()
             if keys[pygame.K_w]:
-                self.player1.moveUp(8, self.screen)
+                self.player1.moveUp(6, self.screen)
             elif keys[pygame.K_s]:
-                self.player1.moveDown(8, self.screen)
+                self.player1.moveDown(6, self.screen)
 
             pygame.display.update()
 
@@ -89,6 +89,7 @@ class PongGame:
         isGameRunning = True
         self.draw_game()
         while isGameRunning:
+            # noinspection PyUnreachableCode
             if False:
                 self.screen.fill(helper.BLUE)
                 self.player1.drawPaddle(self.screen)
@@ -99,8 +100,8 @@ class PongGame:
                 PongGame.draw_text(self.screen,helper.P2Score, PongGame.text_font, 150, 20)
                 PongGame.draw_text(self.screen,helper.P1Score, PongGame.text_font, helper.getWidth() - 150, 20)
                 pygame.display.update()
-            self.moveAiPaddles(net1,net2)
             self.ball.moveBall(self.screen)
+            self.moveAiPaddles(net1,net2)
             helper.checkCollision(self.player1, self.player2, self.ball)
             duration=time.time()-startTime
             if helper.P1Score == 5 or helper.P2Score == 5 or helper.p1Hits>=maxHits or helper.p2Hits>=maxHits:
@@ -110,8 +111,8 @@ class PongGame:
                 break
     # endregion
     def calculate_fitness(self,duration):
-        self.genome1.fitness+=helper.p1Hits+duration
-        self.genome2.fitness+=helper.p2Hits+duration
+        self.genome1.fitness+=helper.p1Hits+duration*0.5
+        self.genome2.fitness+=helper.p2Hits+duration*0.5
 
     def moveAiPaddles(self, net1, net2):
             counter=1
@@ -123,25 +124,26 @@ class PongGame:
                 output2=net2.activate((
                     (self.player2.y, abs(self.player2.x - self.ball.x), self.ball.y)))
                 decision2=output2.index(max(output2))
-                valid1 = True
+                valid1 = False
                 if(genome==self.genome1):
-                    if decision1 == 0:
-                        genome.fitness -= 0.01
-                    elif decision1 == 1:
+                    if decision1 == 1:
                         valid1 = self.player1.moveUp(6,self.screen)
+                       # genome.fitness += 0.3
                     elif decision1 == 2:
-                        valid1 = self.player1.moveDown(6,self.screen)
-                    if not valid1:
+                        valid1 = self.player1.moveUp(6,self.screen)
+                       # genome.fitness += 0.3
+                    if valid1==False:
                         genome.fitness -= 1
-                valid2 = True
+                valid2 = False
                 if(genome==self.genome2):
-                    if decision2 == 0:
-                        genome.fitness -= 0.01
-                    elif decision2 == 1:
+                    if decision2 == 1:
                         valid2 = self.player2.moveUp(6,self.screen)
+                        #genome.fitness += 0.3
                     elif  decision2 == 2:
                         valid2 = self.player2.moveDown(6,self.screen)
-                    if not valid2:
+                        #genome.fitness += 0.3
+
+                    if valid2==False:
                         genome.fitness -= 1
 
 
@@ -162,13 +164,13 @@ def eval_genomes(genomes, config):
 
 
 def run_neat(config):
-    p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-20')
-    #p = neat.Population(config)
+    #p = neat.Checkpointer.restore_checkpoint('neat-checkpoint-133')
+    p = neat.Population(config)
     p.add_reporter(neat.StdOutReporter(True))
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
     p.add_reporter(neat.Checkpointer(1))
-    winner = p.run(eval_genomes, 1)
+    winner = p.run(eval_genomes, 20)
     with open("best.pickle", "wb") as f:
         pickle.dump(winner, f)
 
@@ -190,6 +192,6 @@ if __name__ == '__main__':
     config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction,
                          neat.DefaultSpeciesSet, neat.DefaultStagnation,
                          config_path)
-    test_best_network(config)
-    #run_neat(config)
+    #test_best_network(config)
+    run_neat(config)
 

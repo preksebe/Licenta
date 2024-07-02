@@ -28,6 +28,7 @@ class ball:
         # pygame.draw.circle(screen,helpers.BLACK,(self.x,self.y),self.r)
 
     def moveBall(self, screen):
+        upOrDown=random.choice([1,-1])
         if self.y < self.r:
             self.yVel = 7
         if self.y > screen.get_height() - self.r:
@@ -35,14 +36,14 @@ class ball:
         if self.x <= self.r:
             self.x = screen.get_width() / 2
             self.y = screen.get_height() / 2
-            self.yVel = 7
-            self.xVel = 7
+            self.yVel = 7*upOrDown
+            self.xVel = -7
             helpers.setScore("p1")
         if self.x >= screen.get_width() - self.r:
             self.x = screen.get_width() / 2
             self.y = screen.get_height() / 2
-            self.yVel = 7
-            self.xVel = -7
+            self.yVel = 7*upOrDown
+            self.xVel = 7
             helpers.setScore("p2")
 
         self.x = self.x + self.xVel
